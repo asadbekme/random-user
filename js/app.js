@@ -14,8 +14,22 @@ refreshBtn.addEventListener('click', (e) => {
 // clear
 clearBtn.addEventListener('click', (e) => {
     e.preventDefault()
-    user.innerHTML = ''
+    user.innerHTML = '' 
     clearBtn.classList.add('hidden')
+})
+
+// search
+form['form__input'].addEventListener('input', () => {
+    const inputValue = form['form__input'].value.toLowerCase()
+    // console.log(inputValue)
+    const names = document.querySelectorAll('.user__name')
+    names.forEach((name) => {
+        if (name.lastElementChild.textContent.toLowerCase().includes(inputValue)) {
+            name.parentElement.classList.remove('hidden')
+        } else {
+            name.parentElement.classList.add('hidden')
+        }
+    })
 })
 
 // get result and update UI
@@ -58,4 +72,16 @@ const updateUI = (data) => {
         ` 
     })
 }
+
+// delete user
+document.addEventListener('click', (e) => {
+    // console.log(e.target.classList[0])
+    if (e.target.classList[0] === 'user__delete--btn') {
+        e.target.parentElement.remove()
+    }
+
+    if (!user.children.length) {
+        clearBtn.classList.add('hidden')
+    }
+})
 
