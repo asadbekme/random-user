@@ -41,7 +41,8 @@ const getData = (resource) => {
 const reload = () => {
     getData(API_URL)
         .then((data) => {
-            console.log('DATA', data)
+            // console.log('DATA', data)
+            updateUI(data)
         }).catch((err) => {
             console.log(err)
         })
